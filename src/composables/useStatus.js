@@ -1,8 +1,16 @@
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 import { getCurrentStatus, getTimeUntilChange } from "../utils/schedule-parser";
 
 export function useStatus(scheduleData, queue) {
   const lastUpdate = ref(new Date());
+  
+  // Watch for schedule data changes and force refresh
+  watch([scheduleData, queue], ([newSchedule, newQueue]) => {
+    if (newSchedule) {
+      console.log(`[useStatus] Schedule data updated for queue ${newQueue}, refreshing status`)
+      lastUpdate.value = new Date();
+    }
+  }, { deep: true });
 
   // Calculate current status
   const status = computed(() => {

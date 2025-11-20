@@ -14,11 +14,24 @@ const STORAGE_KEYS = {
 
 export const storage = {
   /**
-   * Get schedule data from localStorage
+   * Get schedule data from localStorage for a specific region/queue
+   * @param {string} region - Region code (optional, gets from current if not provided)
+   * @param {string} queue - Queue number (optional, gets from current if not provided)
    */
-  getSchedule() {
+  getSchedule(region = null, queue = null) {
     try {
-      const data = localStorage.getItem(STORAGE_KEYS.SCHEDULE);
+      // If region/queue provided, get specific schedule
+      if (region && queue) {
+        const key = `${STORAGE_KEYS.SCHEDULE}_${region}_${queue}`;
+        const data = localStorage.getItem(key);
+        return data ? JSON.parse(data) : null;
+      }
+
+      // Otherwise get the current region/queue schedule
+      const currentRegion = this.getRegion();
+      const currentQueue = this.getQueue();
+      const key = `${STORAGE_KEYS.SCHEDULE}_${currentRegion}_${currentQueue}`;
+      const data = localStorage.getItem(key);
       return data ? JSON.parse(data) : null;
     } catch (error) {
       console.error("Failed to get schedule from storage:", error);
@@ -27,12 +40,33 @@ export const storage = {
   },
 
   /**
-   * Save schedule data to localStorage
+   * Save schedule data to localStorage for a specific region/queue
+   * @param {Object} data - Schedule data
+   * @param {string} region - Region code (optional, uses current if not provided)
+   * @param {string} queue - Queue number (optional, uses current if not provided)
    */
-  setSchedule(data) {
+  setSchedule(data, region = null, queue = null) {
     try {
-      localStorage.setItem(STORAGE_KEYS.SCHEDULE, JSON.stringify(data));
-      localStorage.setItem(STORAGE_KEYS.LAST_UPDATE, new Date().toISOString());
+      // If region/queue provided, save for that specific combination
+      if (region && queue) {
+        const key = `${STORAGE_KEYS.SCHEDULE}_${region}_${queue}`;
+        localStorage.setItem(key, JSON.stringify(data));
+        localStorage.setItem(
+          `${STORAGE_KEYS.LAST_UPDATE}_${region}_${queue}`,
+          new Date().toISOString()
+        );
+        return true;
+      }
+
+      // Otherwise save for current region/queue
+      const currentRegion = this.getRegion();
+      const currentQueue = this.getQueue();
+      const key = `${STORAGE_KEYS.SCHEDULE}_${currentRegion}_${currentQueue}`;
+      localStorage.setItem(key, JSON.stringify(data));
+      localStorage.setItem(
+        `${STORAGE_KEYS.LAST_UPDATE}_${currentRegion}_${currentQueue}`,
+        new Date().toISOString()
+      );
       return true;
     } catch (error) {
       console.error("Failed to save schedule to storage:", error);
@@ -78,9 +112,12 @@ export const storage = {
 
   /**
    * Check if schedules are different (for change detection)
+   * @param {Object} newData - New schedule data
+   * @param {string} region - Region code (optional)
+   * @param {string} queue - Queue number (optional)
    */
-  hasScheduleChanged(newData) {
-    const oldData = this.getSchedule();
+  hasScheduleChanged(newData, region = null, queue = null) {
+    const oldData = this.getSchedule(region, queue);
     if (!oldData) return true;
 
     return JSON.stringify(oldData) !== JSON.stringify(newData);

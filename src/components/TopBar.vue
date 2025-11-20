@@ -1,26 +1,28 @@
 <template>
   <div
-    class="flex justify-between items-center p-4 bg-white dark:bg-gray-800/95 rounded-xl mx-4 my-4 shadow-lg"
+    class="p-3 sm:p-4 bg-white dark:bg-gray-800/95 rounded-xl mx-3 sm:mx-4 my-3 sm:my-4 shadow-lg"
   >
-    <div class="flex-1">
+    <div class="flex justify-between items-center gap-3">
       <!-- Settings Button -->
       <button
-        class="bg-gray-800/8 dark:bg-gray-700/50 text-gray-700 dark:text-gray-300 p-2.5 rounded-lg transition-all duration-200 flex items-center justify-center hover:bg-gray-800/12 dark:hover:bg-gray-600/50"
+        class="flex-1 bg-gray-800/8 dark:bg-gray-700/50 text-gray-700 dark:text-gray-300 p-3 sm:p-2.5 rounded-lg transition-all duration-200 hover:bg-gray-800/12 dark:hover:bg-gray-600/50 active:scale-95 min-h-[48px]"
         @click="$emit('open-settings')"
         title="Налаштування"
       >
-        <div
-          class="flex items-center gap-2.5 text-gray-800 dark:text-gray-200 text-lg font-semibold"
-        >
-          <MapPin :size="22" />
-          <span class="text-lg">{{ regionName }}</span>
-          <span class="opacity-40 font-light">•</span>
-          <span> Черга {{ queue }} </span>
+        <div class="flex items-center justify-center gap-2 sm:gap-2.5">
+          <MapPin :size="20" class="flex-shrink-0" />
+          <div
+            class="flex flex-col sm:flex-row sm:items-center gap-0.5 sm:gap-2.5 text-gray-800 dark:text-gray-200 font-semibold text-left sm:text-center"
+          >
+            <span class="text-sm sm:text-lg leading-tight">{{ regionName }}</span>
+            <span class="opacity-40 font-light hidden sm:inline">•</span>
+            <span class="text-xs sm:text-base opacity-80 sm:opacity-100"
+              >Черга {{ queue }}</span
+            >
+          </div>
         </div>
       </button>
-    </div>
 
-    <div class="flex items-center gap-2">
       <!-- Theme Toggle -->
       <ThemeToggle />
     </div>

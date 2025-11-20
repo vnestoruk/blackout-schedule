@@ -61,8 +61,24 @@ function getCurrentMinutes() {
 function isInPeriod(period) {
   const currentMinutes = getCurrentMinutes();
   const fromMinutes = timeToMinutes(period.from);
-  const toMinutes = timeToMinutes(period.to);
+  let toMinutes = timeToMinutes(period.to);
 
+  // Special case: if period ends at 00:00, treat it as end of day (24:00)
+  if (toMinutes === 0) {
+    toMinutes = 24 * 60; // 1440 minutes (midnight = end of day)
+  }
+
+  // Handle midnight crossing: if toMinutes is less than fromMinutes,
+  // the period crosses midnight (e.g., 23:00 to 01:00)
+  if (toMinutes < fromMinutes) {
+    // Period crosses midnight into next day
+    // Current time is in the period if it's either:
+    // 1. After the start time (today), OR
+    // 2. Before the end time (early morning of next day)
+    return currentMinutes >= fromMinutes || currentMinutes < toMinutes;
+  }
+
+  // Normal case: period within the same day
   return currentMinutes >= fromMinutes && currentMinutes < toMinutes;
 }
 

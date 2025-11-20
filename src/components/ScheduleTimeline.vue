@@ -1,8 +1,8 @@
 <template>
-  <div class="py-5">
-    <div class="bg-white dark:bg-gray-800/95 rounded-xl p-5 shadow-xl">
+  <div class="py-3 sm:py-5">
+    <div class="bg-white dark:bg-gray-800/95 rounded-xl p-3 sm:p-5 shadow-xl">
       <!-- Timeline bar -->
-      <div class="relative h-10 rounded-lg overflow-visible mb-4">
+      <div class="relative h-8 sm:h-10 rounded-lg overflow-visible mb-3 sm:mb-4">
         <!-- Background (green - power ON) -->
         <div
           class="absolute w-full h-full rounded-md opacity-60 bg-gradient-to-r from-power-on-light to-power-on border-2 border-power-on"
@@ -46,7 +46,7 @@
       </div>
 
       <!-- Hour scale -->
-      <div class="flex justify-between relative h-8 mb-2.5 -mx-3">
+      <div class="flex justify-between relative h-7 sm:h-8 mb-2 sm:mb-2.5 -mx-2 sm:-mx-3">
         <div
           v-for="hour in 25"
           :key="hour - 1"
@@ -55,12 +55,12 @@
           <div
             :class="[
               'absolute top-0 bg-gray-800/20 dark:bg-gray-600/30',
-              (hour - 1) % 6 === 0 ? 'w-0.5 h-3' : 'w-px h-2',
+              (hour - 1) % 6 === 0 ? 'w-0.5 h-2.5 sm:h-3' : 'w-px h-1.5 sm:h-2',
             ]"
           ></div>
           <span
             v-if="(hour - 1) % 3 === 0"
-            class="text-xs text-gray-700 dark:text-gray-300 mt-3.5 font-semibold"
+            class="text-[10px] sm:text-xs text-gray-700 dark:text-gray-300 mt-2.5 sm:mt-3.5 font-semibold"
           >
             {{ String(hour - 1).padStart(2, "0") }}
           </span>
@@ -68,20 +68,20 @@
       </div>
 
       <!-- Legend -->
-      <div class="flex justify-center gap-5 mt-4">
+      <div class="flex justify-center gap-3 sm:gap-5 mt-3 sm:mt-4">
         <div
-          class="flex items-center gap-2 text-gray-800 dark:text-gray-200 text-xs font-medium"
+          class="flex items-center gap-1.5 sm:gap-2 text-gray-800 dark:text-gray-200 text-[10px] sm:text-xs font-medium"
         >
           <div
-            class="w-6 h-3 rounded opacity-60 border-2 border-gray-800/20 dark:border-gray-600/30 bg-gradient-to-r from-power-on-light to-power-on"
+            class="w-4 sm:w-6 h-2.5 sm:h-3 rounded opacity-60 border-2 border-gray-800/20 dark:border-gray-600/30 bg-gradient-to-r from-power-on-light to-power-on"
           ></div>
           <span>Світло є</span>
         </div>
         <div
-          class="flex items-center gap-2 text-gray-800 dark:text-gray-200 text-xs font-medium"
+          class="flex items-center gap-1.5 sm:gap-2 text-gray-800 dark:text-gray-200 text-[10px] sm:text-xs font-medium"
         >
           <div
-            class="w-6 h-3 rounded opacity-85 border-2 border-gray-800/20 dark:border-gray-600/30 bg-gradient-to-r from-power-off-light to-power-off"
+            class="w-4 sm:w-6 h-2.5 sm:h-3 rounded opacity-85 border-2 border-gray-800/20 dark:border-gray-600/30 bg-gradient-to-r from-power-off-light to-power-off"
           ></div>
           <span>Відключення</span>
         </div>

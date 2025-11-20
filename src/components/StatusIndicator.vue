@@ -1,15 +1,15 @@
 <template>
-  <div class="py-10 px-5 text-center">
-    <div class="mb-8">
+  <div class="py-6 sm:py-10 px-4 sm:px-5 text-center">
+    <div class="mb-6 sm:mb-8">
       <div
-        class="mb-2.5 animate-pulse-slow flex justify-center"
+        class="mb-2 sm:mb-2.5 animate-pulse-slow flex justify-center"
         :class="status.isOn ? 'text-power-on' : 'text-power-off'"
       >
-        <Lightbulb v-if="status.isOn" :size="80" :stroke-width="2" />
-        <Flame v-else :size="80" :stroke-width="2" />
+        <Lightbulb v-if="status.isOn" :size="64" :stroke-width="2" class="sm:w-20 sm:h-20" />
+        <Flame v-else :size="64" :stroke-width="2" class="sm:w-20 sm:h-20" />
       </div>
       <h1
-        class="text-5xl font-bold m-0 drop-shadow-md"
+        class="text-4xl sm:text-5xl font-bold m-0 drop-shadow-md"
         :class="
           status.isOn
             ? 'text-power-on dark:text-power-on-light'
@@ -22,13 +22,13 @@
 
     <div
       v-if="timeUntilChange"
-      class="bg-white dark:bg-gray-800/95 text-gray-800 dark:text-gray-200 rounded-2xl p-5 my-5 mx-auto max-w-md shadow-xl border-2"
+      class="bg-white dark:bg-gray-800/95 text-gray-800 dark:text-gray-200 rounded-2xl p-4 sm:p-5 my-4 sm:my-5 mx-auto max-w-md shadow-xl border-2"
       :class="status.isOn ? 'border-power-on/30' : 'border-power-off/30'"
     >
-      <p class="text-base m-0 mb-2.5 opacity-90 font-medium">
+      <p class="text-sm sm:text-base m-0 mb-2 sm:mb-2.5 opacity-90 font-medium">
         {{ changeLabel }}
       </p>
-      <p class="text-3xl font-bold m-0">
+      <p class="text-2xl sm:text-3xl font-bold m-0">
         <span v-if="timeUntilChange.hours > 0"
           >{{ timeUntilChange.hours }} год
         </span>
@@ -38,7 +38,7 @@
 
     <div
       v-if="currentPeriod"
-      class="mt-5 text-lg opacity-90 text-gray-800 dark:text-gray-200"
+      class="mt-4 sm:mt-5 text-base sm:text-lg opacity-90 text-gray-800 dark:text-gray-200 px-2"
     >
       <p class="my-1.5">
         Відключено: {{ currentPeriod.from }} - {{ currentPeriod.to }}
@@ -47,7 +47,7 @@
 
     <div
       v-if="nextPeriod && !currentPeriod"
-      class="mt-5 text-lg opacity-90 text-gray-800 dark:text-gray-200"
+      class="mt-4 sm:mt-5 text-base sm:text-lg opacity-90 text-gray-800 dark:text-gray-200 px-2"
     >
       <p class="my-1.5">
         Наступне відключення:

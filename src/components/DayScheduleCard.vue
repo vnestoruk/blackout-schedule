@@ -4,27 +4,27 @@
   >
     <!-- Header -->
     <div
-      class="px-6 py-4 border-b-4"
+      class="px-4 sm:px-6 py-3 sm:py-4 border-b-4"
       :class="[
         isToday
           ? 'bg-gradient-to-r from-emerald-500 to-teal-500 dark:from-emerald-600 dark:to-teal-600 border-emerald-600 dark:border-emerald-500'
           : 'bg-gradient-to-r from-gray-700 to-gray-800 dark:from-gray-800 dark:to-gray-900 border-gray-800 dark:border-gray-700',
       ]"
     >
-      <div class="flex justify-between items-center">
-        <div>
-          <h3 class="text-white text-2xl font-bold m-0">{{ dayLabel }}</h3>
-          <p class="text-white/80 text-sm mt-1">{{ formattedDate }}</p>
+      <div class="flex justify-between items-center gap-2">
+        <div class="flex-1 min-w-0">
+          <h3 class="text-white text-xl sm:text-2xl font-bold m-0 truncate">{{ dayLabel }}</h3>
+          <p class="text-white/80 text-xs sm:text-sm mt-1">{{ formattedDate }}</p>
         </div>
         <div
           v-if="isToday"
-          class="bg-white/25 backdrop-blur-sm px-4 py-2 rounded-full text-white text-sm font-bold shadow-lg"
+          class="bg-white/25 backdrop-blur-sm px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-white text-xs sm:text-sm font-bold shadow-lg flex-shrink-0"
         >
           Сьогодні
         </div>
         <div
           v-else-if="isTomorrow"
-          class="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-white text-sm font-bold"
+          class="bg-white/20 backdrop-blur-sm px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-white text-xs sm:text-sm font-bold flex-shrink-0"
         >
           Завтра
         </div>
@@ -32,15 +32,15 @@
     </div>
 
     <!-- Content -->
-    <div class="p-6">
+    <div class="p-4 sm:p-6">
       <!-- View Mode Toggle -->
-      <div class="flex justify-end mb-4">
+      <div class="flex justify-end mb-3 sm:mb-4">
         <div
-          class="flex gap-2 bg-gray-100 dark:bg-gray-700/50 p-1 rounded-lg shadow-sm"
+          class="flex gap-1 sm:gap-2 bg-gray-100 dark:bg-gray-700/50 p-1 rounded-lg shadow-sm"
         >
           <button
             :class="[
-              'bg-transparent px-3 py-2 rounded-md transition-all duration-200 flex items-center justify-center',
+              'bg-transparent px-2.5 sm:px-3 py-2 rounded-md transition-all duration-200 flex items-center justify-center min-h-[40px] active:scale-95',
               viewMode === 'timeline'
                 ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-gray-100 shadow-md'
                 : 'text-gray-600 dark:text-gray-400 hover:bg-white/50 dark:hover:bg-gray-600/30',
@@ -52,7 +52,7 @@
           </button>
           <button
             :class="[
-              'bg-transparent px-3 py-2 rounded-md transition-all duration-200 flex items-center justify-center',
+              'bg-transparent px-2.5 sm:px-3 py-2 rounded-md transition-all duration-200 flex items-center justify-center min-h-[40px] active:scale-95',
               viewMode === 'list'
                 ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-gray-100 shadow-md'
                 : 'text-gray-600 dark:text-gray-400 hover:bg-white/50 dark:hover:bg-gray-600/30',
@@ -73,38 +73,38 @@
       />
 
       <!-- List View -->
-      <div v-else class="flex flex-col gap-3">
+      <div v-else class="flex flex-col gap-2.5 sm:gap-3">
         <div
           v-for="(period, index) in displayPeriods"
           :key="index"
           :class="[
-            'bg-gray-50 dark:bg-gray-700/30 rounded-xl p-4 transition-all duration-300 relative',
+            'bg-gray-50 dark:bg-gray-700/30 rounded-xl p-3 sm:p-4 transition-all duration-300 relative',
             period.isActive
               ? 'border-2 border-power-off dark:border-red-500 shadow-lg shadow-power-off/20'
               : 'border-2 border-gray-200 dark:border-gray-600/50',
           ]"
         >
-          <div class="flex items-center justify-center gap-2.5 mb-2 flex-wrap">
+          <div class="flex items-center justify-center gap-2 sm:gap-2.5 mb-2 flex-wrap">
             <span
-              class="bg-power-off text-white px-4 py-2 rounded-lg text-lg font-bold shadow-md"
+              class="bg-power-off text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-base sm:text-lg font-bold shadow-md"
             >
               {{ period.from }}
             </span>
-            <span class="text-xl text-gray-400 dark:text-gray-500">→</span>
+            <span class="text-lg sm:text-xl text-gray-400 dark:text-gray-500">→</span>
             <span
-              class="bg-power-off text-white px-4 py-2 rounded-lg text-lg font-bold shadow-md"
+              class="bg-power-off text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-base sm:text-lg font-bold shadow-md"
             >
               {{ period.to }}
             </span>
           </div>
           <div
-            class="text-center text-gray-700 dark:text-gray-300 text-sm font-semibold"
+            class="text-center text-gray-700 dark:text-gray-300 text-xs sm:text-sm font-semibold"
           >
             {{ calculateDuration(period) }}
           </div>
           <div
             v-if="period.isActive"
-            class="absolute top-2 right-3 bg-power-off text-white px-3 py-1 rounded-full text-xs font-bold animate-blink"
+            class="absolute top-2 right-2 sm:right-3 bg-power-off text-white px-2 sm:px-3 py-1 rounded-full text-xs font-bold animate-blink"
           >
             Зараз
           </div>
@@ -112,18 +112,18 @@
 
         <div
           v-if="hasPastPeriods"
-          class="text-center p-2.5 mt-2 bg-gray-100 dark:bg-gray-700/30 rounded-lg text-gray-600 dark:text-gray-400 text-xs italic"
+          class="text-center p-2 sm:p-2.5 mt-1 sm:mt-2 bg-gray-100 dark:bg-gray-700/30 rounded-lg text-gray-600 dark:text-gray-400 text-xs italic"
         >
           {{ pastPeriodsCount }} минулих періодів приховано
         </div>
       </div>
 
       <!-- Analytics -->
-      <div class="mt-6 space-y-3">
+      <div class="mt-4 sm:mt-6 space-y-2.5 sm:space-y-3">
         <div
-          class="bg-gradient-to-r from-gray-50 to-gray-100/50 dark:from-gray-800/40 dark:to-gray-700/20 rounded-xl p-4 border-2 border-gray-200 dark:border-gray-700"
+          class="bg-gradient-to-r from-gray-50 to-gray-100/50 dark:from-gray-800/40 dark:to-gray-700/20 rounded-xl p-3 sm:p-4 border-2 border-gray-200 dark:border-gray-700"
         >
-          <div class="grid grid-cols-2 gap-4">
+          <div class="grid grid-cols-2 gap-3 sm:gap-4">
             <!-- Periods count -->
             <div class="text-center">
               <div
@@ -131,7 +131,7 @@
               >
                 Періодів
               </div>
-              <div class="text-gray-800 dark:text-gray-100 text-2xl font-bold">
+              <div class="text-gray-800 dark:text-gray-100 text-xl sm:text-2xl font-bold">
                 {{ scheduleInfo.periods.length }}
               </div>
             </div>
@@ -143,7 +143,7 @@
               >
                 Без світла
               </div>
-              <div class="text-gray-800 dark:text-gray-100 text-2xl font-bold">
+              <div class="text-gray-800 dark:text-gray-100 text-xl sm:text-2xl font-bold">
                 {{ offPercentage }}%
               </div>
             </div>
@@ -151,33 +151,33 @@
         </div>
 
         <!-- Time details -->
-        <div class="grid grid-cols-2 gap-3">
+        <div class="grid grid-cols-2 gap-2.5 sm:gap-3">
           <!-- Off time -->
           <div
-            class="bg-gradient-to-br from-red-50 to-red-100/50 dark:from-red-900/20 dark:to-red-800/10 rounded-xl p-4 border border-red-200/50 dark:border-red-700/30"
+            class="bg-gradient-to-br from-red-50 to-red-100/50 dark:from-red-900/20 dark:to-red-800/10 rounded-xl p-3 sm:p-4 border border-red-200/50 dark:border-red-700/30"
           >
             <div
-              class="flex items-center gap-2 text-red-600 dark:text-red-400 text-xs font-medium mb-2"
+              class="flex items-center gap-1.5 sm:gap-2 text-red-600 dark:text-red-400 text-xs font-medium mb-1.5 sm:mb-2"
             >
-              <Zap :size="14" />
-              <span>Відключення</span>
+              <Zap :size="12" class="sm:w-3.5 sm:h-3.5" />
+              <span class="text-[10px] sm:text-xs">Відключення</span>
             </div>
-            <div class="text-gray-800 dark:text-gray-100 text-xl font-bold">
+            <div class="text-gray-800 dark:text-gray-100 text-base sm:text-xl font-bold">
               {{ formatTime(totalOffMinutes) }}
             </div>
           </div>
 
           <!-- On time -->
           <div
-            class="bg-gradient-to-br from-green-50 to-green-100/50 dark:from-green-900/20 dark:to-green-800/10 rounded-xl p-4 border border-green-200/50 dark:border-green-700/30"
+            class="bg-gradient-to-br from-green-50 to-green-100/50 dark:from-green-900/20 dark:to-green-800/10 rounded-xl p-3 sm:p-4 border border-green-200/50 dark:border-green-700/30"
           >
             <div
-              class="flex items-center gap-2 text-green-600 dark:text-green-400 text-xs font-medium mb-2"
+              class="flex items-center gap-1.5 sm:gap-2 text-green-600 dark:text-green-400 text-xs font-medium mb-1.5 sm:mb-2"
             >
-              <Lightbulb :size="14" />
-              <span>Світло є</span>
+              <Lightbulb :size="12" class="sm:w-3.5 sm:h-3.5" />
+              <span class="text-[10px] sm:text-xs">Світло є</span>
             </div>
-            <div class="text-gray-800 dark:text-gray-100 text-xl font-bold">
+            <div class="text-gray-800 dark:text-gray-100 text-base sm:text-xl font-bold">
               {{ formatTime(totalOnMinutes) }}
             </div>
           </div>
@@ -185,9 +185,9 @@
       </div>
 
       <!-- Footer info -->
-      <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+      <div class="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-gray-200 dark:border-gray-700">
         <div
-          class="flex justify-between text-xs text-gray-500 dark:text-gray-400"
+          class="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-2 text-[10px] sm:text-xs text-gray-500 dark:text-gray-400"
         >
           <span>Оновлено: {{ scheduleInfo.createdAt }}</span>
           <span>Затверджено: {{ scheduleInfo.approvedSince }}</span>

@@ -32,8 +32,8 @@
     </div>
 
     <!-- Main Content -->
-    <div v-else class="flex-1 pb-15">
-      <div class="max-w-5xl mx-auto">
+    <div v-else class="flex-1 pb-10 sm:pb-15">
+      <div class="max-w-5xl mx-auto w-full">
         <!-- Top Bar with Theme Toggle -->
         <TopBar :region="region" :queue="queue" @open-settings="openSettings" />
 
@@ -46,20 +46,20 @@
         />
 
         <!-- Game Toggle Button (shown when power is OFF) -->
-        <div v-if="!status.isOn" class="flex justify-center my-5 px-5">
+        <div v-if="!status.isOn" class="flex justify-center my-4 sm:my-5 px-4 sm:px-5">
           <button
             @click="toggleGame"
             :class="[
-              'bg-white dark:bg-gray-800 px-6 py-3 rounded-xl text-lg font-semibold',
-              'transition-all duration-300 flex items-center gap-2 shadow-lg',
+              'bg-white dark:bg-gray-800 px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl text-base sm:text-lg font-semibold min-h-[48px]',
+              'transition-all duration-300 flex items-center gap-2 shadow-lg active:scale-95',
               'hover:bg-gray-50 dark:hover:bg-gray-700 hover:-translate-y-0.5 hover:shadow-xl',
               showGame
                 ? 'text-blue-600 dark:text-blue-400 border-2 border-blue-600 dark:border-blue-400'
                 : 'text-gray-800 dark:text-gray-200 border-2 border-gray-300 dark:border-gray-700',
             ]"
           >
-            <X v-if="showGame" :size="20" />
-            <Gamepad2 v-else :size="20" />
+            <X v-if="showGame" :size="18" class="sm:w-5 sm:h-5" />
+            <Gamepad2 v-else :size="18" class="sm:w-5 sm:h-5" />
             <span>{{ showGame ? "Закрити гру" : "Грати" }}</span>
           </button>
         </div>
@@ -86,13 +86,13 @@
     </div>
 
     <!-- Footer -->
-    <footer class="p-5 text-center text-sm opacity-80 mt-auto">
+    <footer class="p-4 sm:p-5 text-center text-xs sm:text-sm opacity-80 mt-auto">
       <!-- Social Links -->
-      <div class="flex justify-center items-center mb-4 gap-4">
+      <div class="flex justify-center items-center mb-3 sm:mb-4 gap-3 sm:gap-4">
         <a
           href="https://x.com/VasylNestoruk"
           target="_blank"
-          class="no-underline font-semibold hover:opacity-70 transition-opacity text-gray-800 dark:text-gray-200"
+          class="no-underline font-semibold hover:opacity-70 transition-opacity text-gray-800 dark:text-gray-200 min-w-[44px] min-h-[44px] flex items-center justify-center"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -101,7 +101,7 @@
             width="100"
             height="100"
             viewBox="0 0 30 30"
-            class="w-6 h-6"
+            class="w-5 h-5 sm:w-6 sm:h-6"
           >
             <path
               fill="currentColor"
@@ -112,7 +112,7 @@
         <a
           href="https://www.instagram.com/v.nestoruk/"
           target="_blank"
-          class="no-underline font-semibold hover:opacity-70 transition-opacity text-gray-800 dark:text-gray-200"
+          class="no-underline font-semibold hover:opacity-70 transition-opacity text-gray-800 dark:text-gray-200 min-w-[44px] min-h-[44px] flex items-center justify-center"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -121,7 +121,7 @@
             width="100"
             height="100"
             viewBox="0 0 30 30"
-            class="w-6 h-6"
+            class="w-5 h-5 sm:w-6 sm:h-6"
           >
             <path
               fill="currentColor"
@@ -130,16 +130,16 @@
           </svg>
         </a>
       </div>
-      <div class="flex justify-center items-center mb-4">
+      <div class="flex justify-center items-center mb-3 sm:mb-4">
         <a
           href="https://www.sternenkofund.org/donate"
           target="_blank"
-          class="no-underline font-semibold hover:opacity-70 transition-opacity text-gray-800 dark:text-gray-200"
+          class="no-underline font-semibold hover:opacity-70 transition-opacity text-gray-800 dark:text-gray-200 min-h-[44px] flex items-center px-3"
         >
           Дай десять гривнів
         </a>
       </div>
-      <p class="m-0 text-gray-700 dark:text-gray-300">
+      <p class="m-0 text-gray-700 dark:text-gray-300 text-xs sm:text-sm">
         2025 💙💛 Зроблено в Україні
       </p>
     </footer>

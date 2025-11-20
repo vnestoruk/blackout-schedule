@@ -1,12 +1,12 @@
 <template>
   <button
     @click="toggleTheme"
-    class="bg-gray-800/8 dark:bg-gray-700/50 text-gray-700 dark:text-gray-300 p-2.5 rounded-lg transition-all duration-200 flex items-center justify-center hover:bg-gray-800/12 dark:hover:bg-gray-600/50"
+    class="flex justify-center items-center p-2.5 sm:p-2.5 text-gray-700 rounded-lg transition-all duration-200 bg-gray-800/8 dark:bg-gray-700/50 dark:text-gray-300 hover:bg-gray-800/12 dark:hover:bg-gray-600/50 active:scale-95 min-w-[44px] min-h-[44px]"
     :title="getThemeTitle()"
   >
-    <Sun v-if="isLight()" :size="22" />
-    <Moon v-else-if="isDark()" :size="22" />
-    <Monitor v-else :size="22" />
+    <Sun v-if="isLight()" :size="22" class="sm:w-7 sm:h-7" />
+    <Moon v-else-if="isDark()" :size="22" class="sm:w-7 sm:h-7" />
+    <Monitor v-else :size="22" class="sm:w-7 sm:h-7" />
   </button>
 </template>
 

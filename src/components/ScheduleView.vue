@@ -1,15 +1,15 @@
 <template>
-  <div class="py-5 px-5">
-    <div class="mb-6">
-      <h2 class="text-gray-800 dark:text-gray-100 text-3xl font-bold m-0 mb-2">
+  <div class="py-4 sm:py-5 px-3 sm:px-5">
+    <div class="mb-5 sm:mb-6">
+      <h2 class="text-gray-800 dark:text-gray-100 text-2xl sm:text-3xl font-bold m-0 mb-2">
         Графіки відключень
       </h2>
-      <p class="text-gray-600 dark:text-gray-300 text-sm">
+      <p class="text-gray-600 dark:text-gray-300 text-xs sm:text-sm">
         Доступно графіків: {{ allSchedules.length }}
       </p>
     </div>
 
-    <div v-if="allSchedules.length > 0" class="space-y-6">
+    <div v-if="allSchedules.length > 0" class="space-y-4 sm:space-y-6">
       <DayScheduleCard
         v-for="(scheduleInfo, index) in allSchedules"
         :key="scheduleInfo.date"
@@ -21,7 +21,7 @@
 
     <div
       v-else
-      class="text-center p-10 text-gray-800 dark:text-gray-200 bg-white dark:bg-gray-800/95 rounded-xl shadow-md"
+      class="text-center p-8 sm:p-10 text-gray-800 dark:text-gray-200 bg-white dark:bg-gray-800/95 rounded-xl shadow-md"
     >
       <p>Немає даних про графік</p>
     </div>

@@ -123,7 +123,6 @@ export function useSubscriptionNotifications(
       try {
         const newData = await fetchSchedule(sub.region, sub.queue);
         const cacheKey = `${sub.region}:${sub.queue}`;
-        const oldStorageKey = `schedule_${cacheKey}`;
         
         // Check for new dates
         const newDates = storage.getNewDates(newData, sub.region, sub.queue);
@@ -132,21 +131,17 @@ export function useSubscriptionNotifications(
           notifyNewScheduleDates(newDates, regionName, sub.queue);
         }
         
-        // Get old data from localStorage
-        const oldData = localStorage.getItem(oldStorageKey);
-        const oldDataParsed = oldData ? JSON.parse(oldData) : null;
-
-        // Check if changed
-        if (
-          oldDataParsed &&
-          JSON.stringify(oldDataParsed) !== JSON.stringify(newData)
-        ) {
+        // Check if changed using the storage helper (now region/queue aware)
+        const hasChanged = storage.hasScheduleChanged(newData, sub.region, sub.queue);
+        
+        if (hasChanged) {
           const regionName = REGIONS[sub.region]?.name || sub.region;
           notifyScheduleChange(regionName, sub.queue);
+          console.log(`[Subscriptions] Schedule changed for ${regionName} ${sub.queue}`);
         }
 
-        // Update stored data
-        localStorage.setItem(oldStorageKey, JSON.stringify(newData));
+        // Update stored data using the storage helper
+        storage.setSchedule(newData, sub.region, sub.queue);
         schedulesCache.value[cacheKey] = newData;
       } catch (error) {
         console.error(
