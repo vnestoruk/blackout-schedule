@@ -1,0 +1,33 @@
+⚠️ PWA ICONS NEEDED ⚠️
+
+To complete the setup, you need to add two icon files to this directory:
+
+1. pwa-192x192.png (192x192 pixels)
+2. pwa-512x512.png (512x512 pixels)
+
+QUICK OPTIONS:
+
+Option 1: Use PWA Builder
+→ Go to: https://www.pwabuilder.com/imageGenerator
+→ Upload a 512x512 icon
+→ Download and place files here
+
+Option 2: Use RealFaviconGenerator
+→ Go to: https://realfavicongenerator.net/
+→ Generate icons
+→ Download and place files here
+
+Option 3: Create manually
+→ Use any graphic editor (Figma, Canva, Photoshop)
+→ Create 512x512 image with ⚡ or 💡 theme
+→ Export as PNG in both sizes
+
+ICON THEME SUGGESTIONS:
+- Lightning bolt ⚡ (represents electricity)
+- Light bulb 💡 (represents power/light)
+- Ukrainian colors 💙💛
+- Simple, bold design works best
+
+For testing, you can use any placeholder images temporarily.
+The app will work without icons, but won't install as PWA properly.
+

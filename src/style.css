@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply m-0 p-0 box-border;
+  }
+
+  body {
+    @apply font-sans antialiased;
+  }
+
+  button {
+    @apply cursor-pointer border-none rounded-lg transition-all duration-200;
+  }
+
+  button:active {
+    @apply scale-98;
+  }
+}
+
+@layer utilities {
+  .scale-98 {
+    transform: scale(0.98);
+  }
+}
